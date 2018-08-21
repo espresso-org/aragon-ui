@@ -110,74 +110,86 @@ SidePanel.defaultProps = {
   onTransitionEnd: () => {},
 }
 
-const Main = styled.div`
-  position: fixed;
-  z-index: 3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: ${({ opened }) => (opened ? 'auto' : 'none')};
-`
 
-const Overlay = styled(animated.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(68, 81, 89, 0.65);
-`
+function getStyles() {
+  return {
+    PANEL_WIDTH,
+    PANEL_OUTER_WIDTH,
+    PANEL_EXTRA_PADDING,
+    PANEL_INNER_WIDTH,
+    CONTENT_PADDING,
+    
 
-const Panel = styled(animated.aside)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  width: ${PANEL_WIDTH + PANEL_EXTRA_PADDING}px;
-  height: 100vh;
-  padding-right: ${PANEL_EXTRA_PADDING}px;
-  background: white;
-  box-shadow: -2px 0 36px rgba(0, 0, 0, 0.2);
-`
+    Main: styled.div`
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: ${({ opened }) => (opened ? 'auto' : 'none')};
+    `,
 
-const PanelHeader = styled.header`
-  position: relative;
-  padding-top: 15px;
-  padding-left: ${CONTENT_PADDING}px;
-  padding-right: 20px;
-  padding-bottom: 15px;
-  ${unselectable()};
-  flex-shrink: 0;
-`
+    Overlay: styled(animated.div)`
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(68, 81, 89, 0.65);
+    `,
 
-const PanelScrollView = styled.div`
-  overflow-y: auto;
-  height: 100%;
-`
+    Panel: styled(animated.aside)`
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      width: ${PANEL_WIDTH + PANEL_EXTRA_PADDING}px;
+      height: 100vh;
+      padding-right: ${PANEL_EXTRA_PADDING}px;
+      background: white;
+      box-shadow: -2px 0 36px rgba(0, 0, 0, 0.2);
+    `,
 
-const PanelContent = styled.div`
-  padding-right: ${CONTENT_PADDING}px;
-  padding-left: ${CONTENT_PADDING}px;
-  padding-bottom: ${CONTENT_PADDING}px;
-`
+    PanelHeader: styled.header`
+      position: relative;
+      padding-top: 15px;
+      padding-left: ${CONTENT_PADDING}px;
+      padding-right: 20px;
+      padding-bottom: 15px;
+      ${unselectable()};
+      flex-shrink: 0;
+    `,
 
-const PanelCloseButton = styled.button`
-  ${PanelHeader} & {
-    position: absolute;
-    padding: 20px;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    background: none;
-    border: 0;
-    outline: 0;
-    &::-moz-focus-inner {
-      border: 0;
-    }
+    PanelScrollViewL styled.div`
+      overflow-y: auto;
+      height: 100%;
+    `,
+
+    PanelContent: styled.div`
+      padding-right: ${CONTENT_PADDING}px;
+      padding-left: ${CONTENT_PADDING}px;
+      padding-bottom: ${CONTENT_PADDING}px;
+    `,
+
+    PanelCloseButton: styled.button`
+      ${PanelHeader} & {
+        position: absolute;
+        padding: 20px;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        background: none;
+        border: 0;
+        outline: 0;
+        &::-moz-focus-inner {
+          border: 0;
+        }
+      }
+    `
   }
-`
+}
 
 SidePanel.PANEL_WIDTH = PANEL_WIDTH
 SidePanel.PANEL_OUTER_WIDTH = PANEL_OUTER_WIDTH
