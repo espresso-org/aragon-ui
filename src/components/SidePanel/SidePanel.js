@@ -16,6 +16,12 @@ const PANEL_OUTER_WIDTH = PANEL_WIDTH + PANEL_EXTRA_PADDING
 const PANEL_INNER_WIDTH = PANEL_WIDTH - CONTENT_PADDING * 2
 
 class SidePanel extends React.PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.styles1 = getStyles()
+  }
+
   componentDidMount() {
     document.addEventListener('keydown', this.handleEscape, false)
   }
@@ -42,15 +48,15 @@ class SidePanel extends React.PureComponent {
     const panelRight = opened ? -PANEL_EXTRA_PADDING : -PANEL_OUTER_WIDTH - 40
 
     return (
-      <Main opened={opened}>
-        <Overlay
+      <this.styles1.Main opened={opened}>
+        <this.styles1.Overlay
           style={{
             opacity: progress,
             pointerEvents: opened ? 'auto' : 'none',
           }}
           onClick={this.handleClose}
         />
-        <Panel
+        <this.styles1.Panel
           style={{
             right: `${panelRight}px`,
             transform: progress.interpolate(
@@ -58,25 +64,25 @@ class SidePanel extends React.PureComponent {
             ),
           }}
         >
-          <PanelHeader>
+          <this.styles1.PanelHeader>
             <h1>
               <Text size="xxlarge">{title}</Text>
             </h1>
             {!blocking && (
-              <PanelCloseButton type="button" onClick={this.handleClose}>
-                <PublicUrl>
+              <this.styles1.PanelCloseButton type="button" onClick={this.handleClose}>
+                <this.styles1.PublicUrl>
                   {publicUrl => (
                     <img src={prefixUrl(close, publicUrl)} alt="Close" />
                   )}
-                </PublicUrl>
-              </PanelCloseButton>
+                </this.styles1.PublicUrl>
+              </this.styles1.PanelCloseButton>
             )}
-          </PanelHeader>
-          <PanelScrollView>
-            <PanelContent>{children}</PanelContent>
-          </PanelScrollView>
-        </Panel>
-      </Main>
+          </this.styles1.PanelHeader>
+          <this.styles1.PanelScrollView>
+            <this.styles1.PanelContent>{children}</this.styles1.PanelContent>
+          </this.styles1.PanelScrollView>
+        </this.styles1.Panel>
+      </this.styles1.Main>
     )
   }
   render() {
@@ -110,7 +116,6 @@ SidePanel.defaultProps = {
   onTransitionEnd: () => {},
 }
 
-
 function getStyles() {
   return {
     PANEL_WIDTH,
@@ -118,7 +123,6 @@ function getStyles() {
     PANEL_EXTRA_PADDING,
     PANEL_INNER_WIDTH,
     CONTENT_PADDING,
-    
 
     Main: styled.div`
       position: fixed;
@@ -162,7 +166,7 @@ function getStyles() {
       flex-shrink: 0;
     `,
 
-    PanelScrollViewL styled.div`
+    PanelScrollView: styled.div`
       overflow-y: auto;
       height: 100%;
     `,
@@ -174,7 +178,7 @@ function getStyles() {
     `,
 
     PanelCloseButton: styled.button`
-      ${PanelHeader} & {
+      ${this.PanelHeader} & {
         position: absolute;
         padding: 20px;
         top: 0;
@@ -187,7 +191,7 @@ function getStyles() {
           border: 0;
         }
       }
-    `
+    `,
   }
 }
 
